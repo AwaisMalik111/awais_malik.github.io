@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.bootstrap.min.css">
+    <style>
+        body {
+            margin: 2em;
+            background: rgb(2, 0, 36);
+            background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(75, 233, 202, 1) 52%, rgba(0, 212, 255, 1) 100%);
+        }
+
+        .loader {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+            animation: loader-rotate 1s infinite cubic-bezier(0.62, 0.49, 0.52, 0.32);
+            transform: skew(20deg, 20deg);
+            transform-origin: center;
+        }
+
+        .main-div {
+            position: absolute;
+            left: 40%;
+            top: 30%;
+            width: auto;
+        }
+
+        .loader-icon1 {
+            border-bottom: 2px solid red;
+            rotate: 4deg;
+        }
+
+        .loader-icon2 {
+            border-bottom: 2px solid #fff;
+            rotate: 129deg;
+        }
+
+        .loader-icon3 {
+            border-bottom: 2px solid green;
+            rotate: 272deg;
+        }
+
+        .text {
+            color: black;
+            position: relative;
+            top: 37px;
+            left: 22px;
+        }
+
+        @keyframes loader-rotate {
+            0% {
+                transform: skew(20deg, 20deg) rotate(0deg)
+            }
+
+            100% {
+                transform: skew(20deg, 20deg) rotate(360deg)
+            }
+        }
+
+        canvas {
+            display: block;
+            vertical-align: bottom;
+        }
+
+        /* ---- particles.js container ---- */
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* background-color: #b61924; */
+            background-image: url("");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+
+        /* ---- stats.js ---- */
+
+        .count-particles {
+            background: #000022;
+            position: absolute;
+            top: 48px;
+            left: 0;
+            width: 80px;
+            color: #13E8E9;
+            font-size: .8em;
+            text-align: left;
+            text-indent: 4px;
+            line-height: 14px;
+            padding-bottom: 2px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .js-count-particles {
+            font-size: 1.1em;
+        }
+
+        #stats,
+        .count-particles {
+            -webkit-user-select: none;
+        }
+
+        #stats {
+            border-radius: 3px 3px 0 0;
+            overflow: hidden;
+        }
+
+        .count-particles {
+            border-radius: 0 0 3px 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <div class="main-div" id="loader">
+        <div class="loader-icon1 loader"></div>
+        <div class="loader-icon2 loader"></div>
+        <div class="loader-icon3 loader"></div>
+        <div class="text">Loading...</div>
+    </div>
+    <table id="example" class="table    " cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Alphabet puzzle</td>
+                <td>2016/01/15</td>
+                <td>Done</td>
+                <td data-order="1000">€1.000,00</td>
+                <td data-order="1000">€1.000,00</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Layout for poster</td>
+                <td>2016/01/31</td>
+                <td>Planned</td>
+                <td data-order="1834">€1.834,00</td>
+                <td data-order="1834">€1.834,00</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Image creation</td>
+                <td>2016/01/23</td>
+                <td>To Do</td>
+                <td data-order="1500">€1.500,00</td>
+                <td data-order="1500">€1.500,00</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Create font</td>
+                <td>2016/02/26</td>
+                <td>Done</td>
+                <td data-order="1200">€1.200,00</td>
+                <td data-order="1200">€1.200,00</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Sticker production</td>
+                <td>2016/02/18</td>
+                <td>Planned</td>
+                <td data-order="2100">€2.100,00</td>
+                <td data-order="2100">€2.100,00</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Glossy poster</td>
+                <td>2016/03/17</td>
+                <td>To Do</td>
+                <td data-order="899">€899,00</td>
+                <td data-order="899">€899,00</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Beer label</td>
+                <td>2016/05/28</td>
+                <td>Confirmed</td>
+                <td data-order="2499">€2.499,00</td>
+                <td data-order="2499">€2.499,00</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Shop sign</td>
+                <td>2016/04/19</td>
+                <td>Offer</td>
+                <td data-order="1099">€1.099,00</td>
+                <td data-order="1099">€1.099,00</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>X-Mas decoration</td>
+                <td>2016/10/31</td>
+                <td>Confirmed</td>
+                <td data-order="1750">€1.750,00</td>
+                <td data-order="1750">€1.750,00</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Halloween invite</td>
+                <td>2016/09/12</td>
+                <td>Planned</td>
+                <td data-order="400">€400,00</td>
+                <td data-order="400">€400,00</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Wedding announcement</td>
+                <td>2016/07/09</td>
+                <td>To Do</td>
+                <td data-order="299">€299,00</td>
+                <td data-order="299">€299,00</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Member pasport</td>
+                <td>2016/06/22</td>
+                <td>Offer</td>
+                <td data-order="149">€149,00</td>
+                <td data-order="149">€149,00</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Drink tickets</td>
+                <td>2016/11/01</td>
+                <td>Confirmed</td>
+                <td data-order="199">€199,00</td>
+                <td data-order="199">€199,00</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>Album cover</td>
+                <td>2017/03/15</td>
+                <td>To Do</td>
+                <td data-order="4999">€4.999,00</td>
+                <td data-order="4999">€4.999,00</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Shipment box</td>
+                <td>2017/02/08</td>
+                <td>Offer</td>
+                <td data-order="1399">€1.399,00</td>
+                <td data-order="1399">€1.399,00</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="filter-wrapper">
+        <input type="checkbox" class="filter-checkbox" value="Software Engineer" /> Done
+        <input type="checkbox" class="filter-checkbox" value="Accountant" /> Planned
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //Only needed for the filename of export files.
+            //Normally set in the title tag of your page.
+            $("#example").hide();
+            document.title = "Simple DataTable";
+            // DataTable initialisation
+            $("#example").DataTable({
+                dom: '<"dt-buttons"Bf><"clear">lirtp',
+                paging: true,
+                autoWidth: true,
+                buttons: [
+                    "colvis",
+                    "copyHtml5",
+                    "csvHtml5",
+                    "excelHtml5",
+                    "pdfHtml5",
+                    "print"
+                ]
+            });
+
+            setTimeout(() => {
+                $("#loader").hide();
+                $("#example").show();
+            }, 2000);
+        });
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 380,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+        /* ---- stats.js config ---- */
+        var count_particles, stats, update;
+        stats = new Stats;
+        stats.setMode(0);
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+        document.body.appendChild(stats.domElement);
+        count_particles = document.querySelector('.js-count-particles');
+        update = function () {
+            stats.begin();
+            stats.end();
+            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+            }
+            requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+    </script>
+</body>
+
+</html>
